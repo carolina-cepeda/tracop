@@ -59,9 +59,9 @@
     "vite": "^6.3.5"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview"
   },
   "engines": {
     "node": ">=18.0.0"
