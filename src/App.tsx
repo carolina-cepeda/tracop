@@ -162,8 +162,8 @@ export default function App() {
           <div className="flex items-center gap-3">
             <Sprout className="w-8 h-8" />
             <div>
-              <h1 className="text-2xl">AgroTrace</h1>
-              <p className="text-green-100 text-sm">Sistema de Trazabilidad Agrícola</p>
+              <h1 className="text-2xl">TRACOP</h1>
+              <p className="text-green-100 text-sm">Trazabilidad de la Cadena de Origen Productivo</p>
             </div>
           </div>
         </div>
