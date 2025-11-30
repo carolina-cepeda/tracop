@@ -168,7 +168,7 @@ npm run build
 Cada etapa tiene un código de color distintivo:
 - 🟢 Verde: Siembra
 - 🟡 Amarillo: Cosecha
-- 🔴 Rojo: Transporte
+- 🟠 Naranja: Transporte
 - 🟣 Púrpura: Acopio
 
 ##  Solución de Problemas
