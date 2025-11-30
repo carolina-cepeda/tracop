@@ -1,6 +1,6 @@
 # ---- JetBrains / IDE ----
 /shelf/
-/workspace.xml
+/.idea/workspace.xml
 /httpRequests/
 /dataSources/
 /dataSources.local.xml
