@@ -128,7 +128,7 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
 
                                 <div className="flex flex-col md:flex-row gap-6 items-start">
                                     {/* QR Code */}
-                                    <div className="bg-white p-4 border-2 border-gray-200 rounded-lg">
+                                    <div id="qr-container" className="bg-white p-4 border-2 border-gray-200 rounded-lg">
                                         <QRCode
                                             value={JSON.stringify({
                                                 lote: selectedData.siembra.codigoLote,
@@ -201,10 +201,12 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                     Trazabilidad: {selectedData.siembra.tipoCultivo} - {selectedData.siembra.codigoLote}
                                 </h3>
 
-                                <div className="space-y-6" id="qr-container">
+                                <div className="space-y-6">
                                     {/* Siembra */}
                                     <div className="relative">
-                                        <div className="absolute left-5 top-16 w-0.5 h-[calc(100%+1.5rem)] bg-green-600"></div>
+                                        {selectedData.cosecha && (
+                                            <div className="absolute left-5 top-16 w-0.5 h-[calc(100%+1.5rem)] bg-green-600"></div>
+                                        )}
 
                                         <div className="flex gap-4">
                                             <div className="bg-green-100 p-3 rounded-full ring-4 ring-green-600 ring-offset-2 z-10">
@@ -214,8 +216,8 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                                 <div className="flex items-center justify-between mb-3">
                                                     <h4 className="text-gray-900">Siembra</h4>
                                                     <span className="px-2.5 py-0.5 rounded-full text-xs bg-green-100 text-green-700">
-                          {selectedData.siembra.estado}
-                        </span>
+                                                        {selectedData.siembra.estado}
+                                                    </span>
                                                 </div>
                                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                                     <div>
@@ -254,7 +256,9 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                     {/* Cosecha */}
                                     {selectedData.cosecha ? (
                                         <div className="relative">
-                                            <div className="absolute left-5 top-16 w-0.5 h-[calc(100%+1.5rem)] bg-yellow-600"></div>
+                                            {selectedData.transporte && (
+                                                <div className="absolute left-5 top-16 w-0.5 h-[calc(100%+1.5rem)] bg-yellow-600"></div>
+                                            )}
 
                                             <div className="flex gap-4">
                                                 <div className="bg-yellow-100 p-3 rounded-full ring-4 ring-yellow-600 ring-offset-2 z-10">
@@ -264,8 +268,8 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                                     <div className="flex items-center justify-between mb-3">
                                                         <h4 className="text-gray-900">Cosecha</h4>
                                                         <span className="px-2.5 py-0.5 rounded-full text-xs bg-yellow-100 text-yellow-700">
-                            {selectedData.cosecha.estado}
-                          </span>
+                                                            {selectedData.cosecha.estado}
+                                                        </span>
                                                     </div>
                                                     <div className="grid grid-cols-2 gap-3 text-sm">
                                                         <div>
@@ -325,7 +329,9 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                     {/* Transporte */}
                                     {selectedData.transporte ? (
                                         <div className="relative">
-                                            <div className="absolute left-5 top-16 w-0.5 h-[calc(100%+1.5rem)] bg-orange-600"></div>
+                                            {selectedData.acopio && (
+                                                <div className="absolute left-5 top-16 w-0.5 h-[calc(100%+1.5rem)] bg-orange-600"></div>
+                                            )}
 
                                             <div className="flex gap-4">
                                                 <div className="bg-orange-100 p-3 rounded-full ring-4 ring-orange-600 ring-offset-2 z-10">
@@ -335,8 +341,8 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                                     <div className="flex items-center justify-between mb-3">
                                                         <h4 className="text-gray-900">Transporte</h4>
                                                         <span className="px-2.5 py-0.5 rounded-full text-xs bg-orange-100 text-orange-700">
-                            {selectedData.transporte.estado}
-                          </span>
+                                                            {selectedData.transporte.estado}
+                                                        </span>
                                                     </div>
                                                     <div className="grid grid-cols-2 gap-3 text-sm">
                                                         <div>
@@ -411,12 +417,12 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                                 <div className="flex items-center justify-between mb-3">
                                                     <h4 className="text-gray-900">Acopio</h4>
                                                     <div className="flex gap-2">
-                          <span className="px-2.5 py-0.5 rounded-full text-xs bg-purple-100 text-purple-700">
-                            {selectedData.acopio.estado}
-                          </span>
+                                                        <span className="px-2.5 py-0.5 rounded-full text-xs bg-purple-100 text-purple-700">
+                                                            {selectedData.acopio.estado}
+                                                        </span>
                                                         <span className="px-2.5 py-0.5 rounded-full text-xs bg-indigo-100 text-indigo-700">
-                            {selectedData.acopio.categoriaAsignada}
-                          </span>
+                                                            {selectedData.acopio.categoriaAsignada}
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 <div className="grid grid-cols-2 gap-3 text-sm">
@@ -451,8 +457,8 @@ export function TrazabilidadScreen({ siembras, cosechas, transportes, acopios }:
                                                         <div className="flex flex-wrap gap-1 mt-1">
                                                             {selectedData.acopio.tratamientosAplicados.map((t, i) => (
                                                                 <span key={i} className="px-2 py-0.5 bg-purple-100 text-purple-700 rounded text-xs">
-                                {t}
-                              </span>
+                                                                    {t}
+                                                                </span>
                                                             ))}
                                                         </div>
                                                     </div>
