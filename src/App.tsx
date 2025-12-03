@@ -5,7 +5,8 @@ import { CosechaScreen } from './components/CosechaScreen';
 import { TransporteScreen } from './components/TransporteScreen';
 import { AcopioScreen } from './components/AcopioScreen';
 import { TrazabilidadScreen } from './components/TrazabilidadScreen';
-import { Sprout, Package, Truck, Warehouse, LayoutDashboard, GitBranch } from 'lucide-react';
+import {Sprout, Package, Truck, Warehouse, LayoutDashboard, GitBranch, Award} from 'lucide-react';
+import {CertificadosScreen} from "./components/CertificadosScreen";
 
 export interface SiembraData {
   id: string;
@@ -139,20 +140,21 @@ const initialTransportes: TransporteData[] = [
 const initialAcopios: AcopioData[] = [];
 
 export default function App() {
-  const [activeScreen, setActiveScreen] = useState<'dashboard' | 'siembra' | 'cosecha' | 'transporte' | 'acopio' | 'trazabilidad'>('dashboard');
+  const [activeScreen, setActiveScreen] = useState<'dashboard' | 'siembra' | 'cosecha' | 'transporte' | 'acopio' |'certificados'| 'trazabilidad'>('dashboard');
   const [siembras, setSiembras] = useState<SiembraData[]>(initialSiembras);
   const [cosechas, setCosechas] = useState<CosechaData[]>(initialCosechas);
   const [transportes, setTransportes] = useState<TransporteData[]>(initialTransportes);
   const [acopios, setAcopios] = useState<AcopioData[]>(initialAcopios);
 
   const screens = [
-    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, color: 'text-blue-600' },
-    { id: 'trazabilidad', label: 'Trazabilidad', icon: GitBranch, color: 'text-indigo-600' },
-    { id: 'siembra', label: 'Siembra', icon: Sprout, color: 'text-green-600' },
-    { id: 'cosecha', label: 'Cosecha', icon: Package, color: 'text-yellow-600' },
-    { id: 'transporte', label: 'Transporte', icon: Truck, color: 'text-orange-600' },
-    { id: 'acopio', label: 'Acopio', icon: Warehouse, color: 'text-purple-600' },
-  ];
+        { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, color: 'text-blue-600' },
+        { id: 'trazabilidad', label: 'Trazabilidad', icon: GitBranch, color: 'text-indigo-600' },
+        { id: 'siembra', label: 'Siembra', icon: Sprout, color: 'text-green-600' },
+        { id: 'cosecha', label: 'Cosecha', icon: Package, color: 'text-yellow-600' },
+        { id: 'transporte', label: 'Transporte', icon: Truck, color: 'text-orange-600' },
+        { id: 'acopio', label: 'Acopio', icon: Warehouse, color: 'text-purple-600' },
+        { id: 'certificados', label: 'Certificados', icon: Award, color: 'text-red-600' },
+    ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -249,6 +251,15 @@ export default function App() {
             onUpdateAcopio={(updated) => setAcopios(acopios.map(a => a.id === updated.id ? updated : a))}
           />
         )}
+
+      {activeScreen === 'certificados' && (
+          <CertificadosScreen
+              siembras={siembras}
+              cosechas={cosechas}
+              transportes={transportes}
+              acopios={acopios}
+          />
+      )}
       </main>
     </div>
   );
